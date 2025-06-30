@@ -1,12 +1,10 @@
-import express from "express";
+import "reflect-metadata";
+import { AppDataSource } from "./database";
 
-const app = express();
-app.use(express.json());
-
-app.get("/", (_req, res) => {
-  res.send("Hello from TypeScript + Express!");
-});
-
-app.listen(3000, () => {
-  console.log("✅ Server running at http://localhost:3000");
-});
+AppDataSource.initialize()
+  .then(() => {
+    console.log("✅ Database connected and schema synced!");
+  })
+  .catch((err) => {
+    console.error("❌ Failed to connect to DB:", err);
+  });

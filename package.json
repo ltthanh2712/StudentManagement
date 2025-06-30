@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts"
+    "start": "ts-node-dev --respawn src/index.ts"
   },
   "dependencies": {
     "dotenv": "^17.0.0",
