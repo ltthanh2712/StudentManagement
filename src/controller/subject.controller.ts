@@ -15,3 +15,13 @@ export const addSubject = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+export const bulkInsertSubjects = async (req: Request, res: Response) => {
+  try {
+    const result = await subjectService.bulkInsert(req.body);
+    res.status(201).json(result);
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : "Unknown error";
+    res.status(500).json({ error: msg });
+  }
+};

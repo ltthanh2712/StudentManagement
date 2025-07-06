@@ -10,3 +10,8 @@ export const createSubject = async (nameSubject: string) => {
   newSubject.nameSubject = nameSubject;
   return await subjectRepo.save(newSubject);
 };
+
+export const bulkInsert = async (subjects: { nameSubject: string }[]) => {
+  const subject = subjectRepo.create(subjects);
+  return await subjectRepo.save(subject);
+};
