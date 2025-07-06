@@ -21,3 +21,13 @@ export const addScore = async (req: Request, res: Response) => {
     res.status(500).json({ error: message });
   }
 };
+
+export const bulkInsertScores = async (req: Request, res: Response) => {
+  try {
+    const result = await scoreService.bulkInsert(req.body);
+    res.status(201).json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Server error";
+    res.status(500).json({ error: message });
+  }
+};

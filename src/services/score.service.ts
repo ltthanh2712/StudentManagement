@@ -28,3 +28,16 @@ export const createScore = async (
 
   return await scoreRepo.save(score);
 };
+
+export const bulkInsert = async (
+  scores: { studentId: number; subjectId: number; score: number }[]
+) => {
+  const scoreEntities = scores.map((s) => {
+    const score = new Score();
+    score.studentId = s.studentId;
+    score.subjectId = s.subjectId;
+    score.score = s.score;
+    return score;
+  });
+  return await scoreRepo.save(scoreEntities);
+};

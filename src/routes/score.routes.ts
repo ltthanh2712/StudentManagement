@@ -6,4 +6,5 @@ const router = Router();
 
 router.post("/", scoreController.addScore);
 router.get("/", scoreController.getAllScore);
+router.post("/bulk", scoreController.bulkInsertScores);
 export default router;
