@@ -16,3 +16,15 @@ export const editStudent = async (id: number, data: Partial<Student>) => {
   Object.assign(student, data);
   return studentRep.save(student);
 };
+
+export const bulkInsert = async (
+  students: {
+    fullname: string;
+    email: string;
+    dateOfBirth: Date;
+    gender: string;
+  }[]
+) => {
+  const student = studentRep.create(students);
+  return await studentRep.save(student);
+};

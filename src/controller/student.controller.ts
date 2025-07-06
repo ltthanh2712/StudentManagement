@@ -16,3 +16,13 @@ export const updateStudent = async (req: Request, res: Response) => {
   const update = await studentService.editStudent(id, req.body);
   res.json(update);
 };
+
+export const bulkInsertStudents = async (req: Request, res: Response) => {
+  try {
+    const result = await studentService.bulkInsert(req.body);
+    res.status(201).json(result);
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : "Unknown error";
+    res.status(500).json({ error: msg });
+  }
+};

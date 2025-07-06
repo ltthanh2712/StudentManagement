@@ -3,13 +3,14 @@ import {
   getAllStudent,
   createNewStudent,
   updateStudent,
+  bulkInsertStudents,
 } from "../controller/student.controller";
-import { editStudent } from "../services/student.service";
 
 const route = express.Router();
 
 route.get("/", getAllStudent);
 route.post("/", createNewStudent);
 route.put("/:id", updateStudent);
+route.post("/bulk", bulkInsertStudents);
 
 export default route;
