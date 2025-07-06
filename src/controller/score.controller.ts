@@ -1,0 +1,23 @@
+import { Request, Response } from "express";
+import * as scoreService from "../services/score.service";
+
+export const getAllScore = async (req: Request, res: Response) => {
+  try {
+    const scores = await scoreService.getAll(); // ✅ thêm await
+    res.status(200).json(scores);
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : "Unknown error";
+    res.status(500).json({ error: msg });
+  }
+};
+
+export const addScore = async (req: Request, res: Response) => {
+  try {
+    const { studentId, subjectId, score } = req.body;
+    const result = await scoreService.createScore(studentId, subjectId, score);
+    res.status(201).json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Server error";
+    res.status(500).json({ error: message });
+  }
+};

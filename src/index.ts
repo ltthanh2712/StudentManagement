@@ -2,6 +2,7 @@ import express from "express";
 import { AppDataSource } from "./database";
 import studentRoutes from "../src/routes/student.routes";
 import subjectRoutes from "../src/routes/subject.routes";
+import scoreRoutes from "../src/routes/score.routes";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -11,6 +12,7 @@ app.use(bodyParser.json());
 
 app.use("/students", studentRoutes);
 app.use("/subjects", subjectRoutes);
+app.use("/scores", scoreRoutes);
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });
