@@ -31,3 +31,35 @@ export const bulkInsertScores = async (req: Request, res: Response) => {
     res.status(500).json({ error: message });
   }
 };
+
+export const upsertScore = async (req: Request, res: Response) => {
+  try {
+    const { fullname, email, dateOfBirth, gender, subjectName, score } =
+      req.body;
+
+    if (
+      !fullname ||
+      !email ||
+      !dateOfBirth ||
+      !gender ||
+      !subjectName ||
+      isNaN(Number(score))
+    ) {
+      return res.status(400).json({ error: "Dữ liệu không hợp lệ" });
+    }
+
+    const result = await scoreService.upsert(
+      fullname,
+      email,
+      new Date(dateOfBirth),
+      gender,
+      subjectName,
+      Number(score)
+    );
+
+    return res.status(200).json(result);
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : "Lỗi server";
+    return res.status(500).json({ error: msg });
+  }
+};
